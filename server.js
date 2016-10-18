@@ -1,9 +1,13 @@
 // where HTTP code lives
 var http = require('http');
 
-http.createServer(function(request, response) {
+function onRequest(request, response) {
+  console.log('Request received.');
   response.writeHead(200, {'Content-Type':'text/plain'});
   response.write('Hello World');
   response.end();
-}).listen(8888);
+}
 
+http.createServer(onRequest).listen(8888); // get trigger every time when a new request comes in
+
+console.log('Server has started.')

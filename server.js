@@ -13,13 +13,14 @@ function start(route, handle) {
     // event listener for the 'data' event which fills postData whenever a new chunk of POST data arrives
     request.addListener('data', function(postDataChunk) {
       postData += postDataChunk;
-      console.log("Received POST data chunk'"+postDataChunk + "'.");
+      console.log("Received POST data chunk'" + postDataChunk + "'.");
     });
 
     // event listener for 'end' event, callback will be trigered whenever all POST data is gathered, route will be called
     request.addListener('end', function() {
       route(handle, pathname, response, postData); // instead of expecting a return value from the route() and call response methods, pass response object to route as the 3rd arugument, so now route will take care of it
     });
+  }
 
   http.createServer(onRequest).listen(8888); // get trigger every time when a new request comes in(when localhost page loads)
   console.log('Server has started.'); // 1. start immediately after we start the server(node server.js)

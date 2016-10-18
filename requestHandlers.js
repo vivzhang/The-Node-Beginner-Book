@@ -1,3 +1,5 @@
+var querystring = require('querystring');
+
 // contains placeholder function for every request handler, allows us to wire the request handlers into the router, giving the router something to route to
 
 // by passing the response to each request handler, we will get a response as soon as that handler finish running, no need to wait till the handlers before it to finish running first(done in a non-blocking function, by using asynchronous callbacks)
@@ -27,7 +29,7 @@ function start(response, postData) {
 function upload(response, postData) {
   console.log('Request handler "upload" was called.');
   response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("You've sent: " + postData);
+  response.write("You've sent the text: " + querystring.parse(postData).text);
   response.end();
 }
 

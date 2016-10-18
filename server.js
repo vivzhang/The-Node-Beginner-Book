@@ -1,10 +1,14 @@
 // where HTTP code lives
 var http = require('http');
+var url = require('url');
 
-function start() {
+function start(route) {
   function onRequest(request, response) { // request and response are objects(contain methods to handle HTTP requests)
-    var pathname = url.parse(request.url).pathname;
+    var pathname = url.parse(request.url).pathname; // the part after the '/'
     console.log('Request for ' + pathname + ' received.'); // 2. when a request is received and callback function is triggered
+
+    route(pathname);
+
     response.writeHead(200, {'Content-Type':'text/plain'}); // in HTTP response header
     response.write('Hello World'); // in HTTP response body
     response.end(); // finishes the response

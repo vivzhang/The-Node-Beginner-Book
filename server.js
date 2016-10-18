@@ -3,7 +3,8 @@ var http = require('http');
 
 function start() {
   function onRequest(request, response) { // request and response are objects(contain methods to handle HTTP requests)
-    console.log('Request received.'); // 2
+    var pathname = url.parse(request.url).pathname;
+    console.log('Request for ' + pathname + ' received.'); // 2. when a request is received and callback function is triggered
     response.writeHead(200, {'Content-Type':'text/plain'}); // in HTTP response header
     response.write('Hello World'); // in HTTP response body
     response.end(); // finishes the response
